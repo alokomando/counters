@@ -13,12 +13,12 @@ export class CountersFacade {
       counter1: {
         id: 'counter1',
         title: 'Twitter',
-        currentCount: 4,
+        currentCount: 0,
       },
       counter2: {
         id: 'counter2',
         title: 'Instagram',
-        currentCount: 8,
+        currentCount: 0,
       },
     },
   };
