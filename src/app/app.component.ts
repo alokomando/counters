@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddClickedData } from './interfaces/add-clicked-data.interface';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'counters';
+  count = 5;
+
+  onAddClicked(addClickedData: AddClickedData) {
+    this.count = addClickedData.currentCount + 1;
+  }
 }
