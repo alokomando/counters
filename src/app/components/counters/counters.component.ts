@@ -32,4 +32,11 @@ export class CountersComponent implements OnInit {
       newCount: countChangeData.currentCount - 1,
     });
   }
+
+  onClearClicked(countChangeData: CountChangeData, counterIndex: number) {
+    this.onCountChange.emit({
+      counter: this.countersData.counters[counterIndex],
+      newCount: 0,
+    });
+  }
 }

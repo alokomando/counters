@@ -15,6 +15,7 @@ export class CounterComponent implements OnInit {
 
   @Output() addClicked = new EventEmitter<CountChangeData>();
   @Output() subtractClicked = new EventEmitter<CountChangeData>();
+  @Output() clearClicked = new EventEmitter<CountChangeData>();
 
   
   constructor() { }
@@ -33,5 +34,9 @@ export class CounterComponent implements OnInit {
     if(this.minLimit !== null && this.count <= this.minLimit) return;
 
     this.subtractClicked.emit({ currentCount: this.count });
+  }
+
+  onClearClicked() {
+    this.clearClicked.emit({ currentCount: this.count });
   }
 }
