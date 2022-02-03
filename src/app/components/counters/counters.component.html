@@ -2,6 +2,7 @@
   <app-counter
     [title]="counter?.title"
     [count]="counter?.currentCount"
+    [minLimit]="0"
     (addClicked)="onAddClicked($event, counterIndex)"
     (subtractClicked)="onSubtractClicked($event, counterIndex)"
   ></app-counter>
