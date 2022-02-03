@@ -1,12 +1,14 @@
 <div class="counter">
-  <div class="inc-count-button">
-      <button (click)="onAddOneClicked()">+1</button>
-  </div>
-  <div class="decrease-count-button">
-      <button (click)="onSubtractOneClicked()">-1</button>
-  </div>
-  <div class="clear-count-button">
-      <button (click)="onClearClicked()">Clear</button>
+  <div class="action-buttons">
+    <div class="inc-count-button">
+        <button (click)="onAddOneClicked()">+1</button>
+    </div>
+    <div class="decrease-count-button">
+        <button (click)="onSubtractOneClicked()">-1</button>
+    </div>
+    <div class="clear-count-button">
+        <button (click)="onClearClicked()">Clear</button>
+    </div>
   </div>
   <div class="counts">{{ count }}</div>
   <div class="title">{{ title }}</div>

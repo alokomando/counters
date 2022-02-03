@@ -2,8 +2,10 @@
 .counter {
     display: flex;
     align-items: center;
-    
-    .inc-count-button {
+
+    .action-buttons {
+        display: flex;
+        align-items: center;
         margin-right: 10px;
     }
     
