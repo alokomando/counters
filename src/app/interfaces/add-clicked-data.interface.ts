@@ -1,5 +1,9 @@
 import { Counter } from "./counters.interface";
 
+export interface MultipleCountsChange {
+  countersToChange: CountChange[];
+}
+
 export interface CountChange {
   counter: Counter;
   newCount: number;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
-import { CountersData, CountersState } from '../../interfaces/counters.interface';
+import { CountersData, CountersState, Counter } from '../../interfaces/counters.interface';
 import { CountersInitialState } from '../../state/initial-state.config';
 
 const browserStorage = localStorage;
@@ -45,13 +45,22 @@ export class CountersFacade {
     }
   }
   
-  changeCount(counterId: string, newCount: number) {
+  changeCounts(countsToChange: {counterId: string, newCount: number}[]) {
     this.countersStore$.pipe(
       take(1),
       tap(currentState => {
-        const counterToAdd = currentState.counters[counterId];
+
+        const countersToAdd: Record<string, Counter> = {};
         
-        if(!counterToAdd) {
+        countsToChange.forEach(countToChange => {
+          const { counterId, newCount } = countToChange;
+          countersToAdd[counterId] = {
+            ...currentState.counters[counterId],
+            currentCount: newCount,
+          };
+        })
+        
+        if(Object.keys(countersToAdd || {}).length === 0) {
           this.countersStore$.next(currentState);
           return;
         }
@@ -60,10 +69,7 @@ export class CountersFacade {
           ...currentState,
           counters: {
             ...currentState.counters,
-            [counterId]: {
-              ...counterToAdd,
-              currentCount: newCount,
-            }
+            ...countersToAdd,
           }
         };
         this.countersStore$.next(newState);

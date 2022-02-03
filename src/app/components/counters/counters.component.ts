@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CountersData } from '../../interfaces/counters.interface';
-import { CountChangeData, CountChange } from '../../interfaces/add-clicked-data.interface';
+import { CountChangeData, MultipleCountsChange, CountChange } from '../../interfaces/add-clicked-data.interface';
 
 @Component({
   selector: 'app-counters',
@@ -11,7 +11,7 @@ export class CountersComponent implements OnInit {
 
   @Input() countersData: CountersData;
 
-  @Output() onCountChange = new EventEmitter<CountChange>();
+  @Output() onCountChange = new EventEmitter<MultipleCountsChange>();
 
 
   constructor() { }
@@ -21,22 +21,47 @@ export class CountersComponent implements OnInit {
 
   onAddClicked(countChangeData: CountChangeData, counterIndex: number) {
     this.onCountChange.emit({
-      counter: this.countersData.counters[counterIndex],
-      newCount: countChangeData.currentCount + 1,
+      countersToChange: [
+        {
+          counter: this.countersData.counters[counterIndex],
+          newCount: countChangeData.currentCount + 1,
+        },
+      ],
     });
   }
 
   onSubtractClicked(countChangeData: CountChangeData, counterIndex: number) {
     this.onCountChange.emit({
-      counter: this.countersData.counters[counterIndex],
-      newCount: countChangeData.currentCount - 1,
+      countersToChange: [
+        {
+          counter: this.countersData.counters[counterIndex],
+          newCount: countChangeData.currentCount - 1,
+        },
+      ],
     });
   }
 
   onClearClicked(countChangeData: CountChangeData, counterIndex: number) {
     this.onCountChange.emit({
-      counter: this.countersData.counters[counterIndex],
-      newCount: 0,
+      countersToChange: [
+        {
+          counter: this.countersData.counters[counterIndex],
+          newCount: 0,
+        },
+      ],
+    });
+  }
+
+  onClearAllCLicked() {
+    const allCountsToClear: CountChange[] = this.countersData.counters.map(counter => {
+      return {
+        counter,
+        newCount: 0,
+      }
+    });
+
+    this.onCountChange.emit({
+      countersToChange: allCountsToClear,
     });
   }
 }
