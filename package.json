@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --open --port 4666",
     "build": "ng build",
+    "deploy": "ng build --prod && git commit -am 'deploy changes' && git push",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
