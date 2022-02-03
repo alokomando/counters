@@ -1,5 +1,15 @@
 
 .counter {
     display: flex;
-    column-gap: 20px;
+    align-items: center;
+    
+    .inc-count-button {
+        margin-right: 10px;
+    }
+    
+    .counts {
+        margin-right: 20px;
+    }
+
+
 }

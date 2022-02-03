@@ -1,4 +1,4 @@
-<div *ngFor="let counter of countersData?.counters; let counterIndex=index">
+<div *ngFor="let counter of countersData?.counters; let counterIndex=index" class="counters">
   <app-counter
     [title]="counter?.title"
     [count]="counter?.currentCount"
