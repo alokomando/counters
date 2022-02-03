@@ -4,17 +4,21 @@ import { tap, map, take } from 'rxjs/operators';
 import { CountersData, CountersState } from '../../interfaces/counters.interface';
 import { CountersInitialState } from '../../state/initial-state.config';
 
+const browserStorage = localStorage;
+const countsKeyForBrowserStorage = 'alon-counts';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CountersFacade {
 
-  private countersState: CountersState = CountersInitialState;
+  private countersState: CountersState;
   private countersStore$ = new BehaviorSubject<CountersState>(null);
 
   counters$: Observable<CountersData>;
 
   constructor() {
+    this.initState();
     this.counters$ = this.getCounters();
     this.countersStore$.next(this.countersState);
   }
@@ -29,6 +33,18 @@ export class CountersFacade {
     );
   }
 
+  private initState() {
+    this.countersState = {...CountersInitialState};
+
+    const countsFromBrowserStorage = browserStorage.getItem(countsKeyForBrowserStorage);
+    const countsFromBrowserStorageObj: Record<string, number> = JSON.parse(countsFromBrowserStorage);
+    debugger;
+    for(let counterId in countsFromBrowserStorageObj) {
+      const countFromBrowserStorage = countsFromBrowserStorageObj[counterId];
+      this.countersState.counters[counterId].currentCount = countFromBrowserStorage;
+    }
+  }
+  
   addCount(counterId: string) {
     this.countersStore$.pipe(
       take(1),
@@ -40,7 +56,7 @@ export class CountersFacade {
           return;
         }
 
-        this.countersStore$.next({
+        const newState: CountersState = {
           ...currentState,
           counters: {
             ...currentState.counters,
@@ -49,7 +65,16 @@ export class CountersFacade {
               currentCount: counterToAdd.currentCount + 1,
             }
           }
-        })
+        };
+        this.countersStore$.next(newState);
+
+        const counts: Record<string, number> = {};
+        for(let counterId in newState.counters) {
+          counts[counterId] = newState.counters[counterId].currentCount;
+        }
+        
+        const stringifiedCounts = JSON.stringify(counts);
+        browserStorage.setItem(countsKeyForBrowserStorage, stringifiedCounts);
       }),
     ).subscribe();
   }
