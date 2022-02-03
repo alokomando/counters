@@ -1,12 +1,14 @@
-<div *ngFor="let counter of countersData?.counters; let counterIndex=index" class="counters">
-  <app-counter
-    [title]="counter?.title"
-    [count]="counter?.currentCount"
-    [minLimit]="0"
-    (addClicked)="onAddClicked($event, counterIndex)"
-    (subtractClicked)="onSubtractClicked($event, counterIndex)"
-    (clearClicked)="onClearClicked($event, counterIndex)"
-  ></app-counter>
+<div class="counters">
+  <div *ngFor="let counter of countersData?.counters; let counterIndex=index" class="counter">
+    <app-counter
+      [title]="counter?.title"
+      [count]="counter?.currentCount"
+      [minLimit]="0"
+      (addClicked)="onAddClicked($event, counterIndex)"
+      (subtractClicked)="onSubtractClicked($event, counterIndex)"
+      (clearClicked)="onClearClicked($event, counterIndex)"
+    ></app-counter>
+  </div>
 </div>
 <div class="clear-all-button">
   <button (click)="onClearAllCLicked()">Clear All</button>

@@ -1,4 +1,10 @@
 
+.counters {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
 .clear-all-button {
     margin-top: 30px;
 

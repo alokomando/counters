@@ -1,17 +1,41 @@
 
-.counter {
+$counter-button-size: 20px;
+$plus-button-color: #77e98a;
+$minus-button-color: #ed7f7f;
+
+.container {
     display: flex;
     align-items: center;
 
-    .action-buttons {
+    .counter {
         display: flex;
         align-items: center;
-        margin-right: 10px;
-    }
-    
-    .counts {
         margin-right: 20px;
+        column-gap: 7px;
+
+        .counter-button {
+            display: flex;
+            min-width: $counter-button-size;
+            min-height: $counter-button-size;
+            justify-content: center;
+            border: 1px solid black;
+            border-radius: 50%;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .inc-count-button {
+            background-color: $plus-button-color;
+        }
+
+        .decrease-count-button {
+            background-color: $minus-button-color;
+        }
     }
 
-
+    .clear-count-button-container {
+        display: flex;
+        justify-content: end;
+        flex: 1;
+    }
 }
