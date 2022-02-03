@@ -1,27 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
-import { CountersData, Counter, CountersState } from '../../interfaces/counters.interface';
+import { CountersData, CountersState } from '../../interfaces/counters.interface';
+import { CountersInitialState } from '../../state/initial-state.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountersFacade {
 
-  private countersState: CountersState = {
-    counters: {
-      counter1: {
-        id: 'counter1',
-        title: 'Twitter',
-        currentCount: 0,
-      },
-      counter2: {
-        id: 'counter2',
-        title: 'Instagram',
-        currentCount: 0,
-      },
-    },
-  };
+  private countersState: CountersState = CountersInitialState;
   private countersStore$ = new BehaviorSubject<CountersState>(null);
 
   counters$: Observable<CountersData>;
