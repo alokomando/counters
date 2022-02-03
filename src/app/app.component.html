@@ -1,9 +1,4 @@
-<app-counter
-	[title]="'Twitter'"
-	[count]="count"
-	(addClicked)="onAddClicked($event)"
-></app-counter>
-
 <app-counters
 	[countersData]="countersFacade.counters$ | async"
+	(addClicked)="onAddClicked($event)"
 ></app-counters>

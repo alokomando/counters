@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AddClickedData } from './interfaces/add-clicked-data.interface';
 import { CountersFacade } from './facades/counters-facade/counters.facade';
+import { Counter } from './interfaces/counters.interface';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,6 @@ import { CountersFacade } from './facades/counters-facade/counters.facade';
 })
 export class AppComponent implements OnInit {
   
-  title = 'counters';
-  count = 5;
-
   constructor(
     public countersFacade: CountersFacade,
   ) {}
@@ -19,7 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddClicked(addClickedData: AddClickedData) {
-    this.count = addClickedData.currentCount + 1;
+  onAddClicked(counter: Counter) {
+    this.countersFacade.addCount(counter.id);
   }
 }

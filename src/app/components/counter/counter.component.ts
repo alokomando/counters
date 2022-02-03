@@ -12,6 +12,8 @@ export class CounterComponent implements OnInit {
   @Input() count: number = 0;
 
   @Output() addClicked = new EventEmitter<AddClickedData>();
+
+  
   constructor() { }
 
   ngOnInit() {

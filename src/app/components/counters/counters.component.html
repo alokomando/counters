@@ -1,3 +1,7 @@
-<div *ngFor="let counter of countersData?.counters">
-  {{ counter?.currentCount }}
+<div *ngFor="let counter of countersData?.counters; let counterIndex=index">
+  <app-counter
+    [title]="counter?.title"
+    [count]="counter?.currentCount"
+    (addClicked)="onAddClicked(counterIndex)"
+  ></app-counter>
 </div>
