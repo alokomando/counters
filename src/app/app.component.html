@@ -3,3 +3,7 @@
 	[count]="count"
 	(addClicked)="onAddClicked($event)"
 ></app-counter>
+
+<app-counters
+	[countersData]="countersFacade.counters$ | async"
+></app-counters>
