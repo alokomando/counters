@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AddClickedData } from '../../interfaces/add-clicked-data.interface';
+import { CountChangeData } from '../../interfaces/add-clicked-data.interface';
 
 @Component({
   selector: 'app-counter',
@@ -11,7 +11,8 @@ export class CounterComponent implements OnInit {
   @Input() title: string = '';
   @Input() count: number = 0;
 
-  @Output() addClicked = new EventEmitter<AddClickedData>();
+  @Output() addClicked = new EventEmitter<CountChangeData>();
+  @Output() subtractClicked = new EventEmitter<CountChangeData>();
 
   
   constructor() { }
@@ -24,6 +25,6 @@ export class CounterComponent implements OnInit {
   }
 
   onSubtractOneClicked() {
-    this.addClicked.emit({ currentCount: this.count });
+    this.subtractClicked.emit({ currentCount: this.count });
   }
 }

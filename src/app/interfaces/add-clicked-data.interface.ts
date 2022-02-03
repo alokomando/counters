@@ -5,6 +5,6 @@ export interface CountChange {
   newCount: number;
 }
 
-export interface AddClickedData {
+export interface CountChangeData {
   currentCount: number;
 }

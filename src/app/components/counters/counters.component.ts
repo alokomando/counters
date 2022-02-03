@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CountersData } from '../../interfaces/counters.interface';
-import { AddClickedData, CountChange } from '../../interfaces/add-clicked-data.interface';
+import { CountChangeData, CountChange } from '../../interfaces/add-clicked-data.interface';
 
 @Component({
   selector: 'app-counters',
@@ -19,10 +19,17 @@ export class CountersComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddClicked(addClickedData: AddClickedData, counterIndex: number) {
+  onAddClicked(countChangeData: CountChangeData, counterIndex: number) {
     this.onCountChange.emit({
       counter: this.countersData.counters[counterIndex],
-      newCount: addClickedData.currentCount + 1,
+      newCount: countChangeData.currentCount + 1,
+    });
+  }
+
+  onSubtractClicked(countChangeData: CountChangeData, counterIndex: number) {
+    this.onCountChange.emit({
+      counter: this.countersData.counters[counterIndex],
+      newCount: countChangeData.currentCount - 1,
     });
   }
 }
