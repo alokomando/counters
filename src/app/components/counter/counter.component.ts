@@ -22,4 +22,8 @@ export class CounterComponent implements OnInit {
   onAddOneClicked() {
     this.addClicked.emit({ currentCount: this.count });
   }
+
+  onSubtractOneClicked() {
+    this.addClicked.emit({ currentCount: this.count });
+  }
 }

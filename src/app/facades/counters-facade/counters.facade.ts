@@ -38,14 +38,14 @@ export class CountersFacade {
 
     const countsFromBrowserStorage = browserStorage.getItem(countsKeyForBrowserStorage);
     const countsFromBrowserStorageObj: Record<string, number> = JSON.parse(countsFromBrowserStorage);
-    debugger;
+    
     for(let counterId in countsFromBrowserStorageObj) {
       const countFromBrowserStorage = countsFromBrowserStorageObj[counterId];
       this.countersState.counters[counterId].currentCount = countFromBrowserStorage;
     }
   }
   
-  addCount(counterId: string) {
+  changeCount(counterId: string, newCount: number) {
     this.countersStore$.pipe(
       take(1),
       tap(currentState => {
@@ -62,7 +62,7 @@ export class CountersFacade {
             ...currentState.counters,
             [counterId]: {
               ...counterToAdd,
-              currentCount: counterToAdd.currentCount + 1,
+              currentCount: newCount,
             }
           }
         };
@@ -72,7 +72,7 @@ export class CountersFacade {
         for(let counterId in newState.counters) {
           counts[counterId] = newState.counters[counterId].currentCount;
         }
-        
+
         const stringifiedCounts = JSON.stringify(counts);
         browserStorage.setItem(countsKeyForBrowserStorage, stringifiedCounts);
       }),

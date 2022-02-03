@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountersFacade } from './facades/counters-facade/counters.facade';
-import { Counter } from './interfaces/counters.interface';
+import { CountChange } from './interfaces/add-clicked-data.interface';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddClicked(counter: Counter) {
-    this.countersFacade.addCount(counter.id);
+  onCountChange(countChange: CountChange) {
+    this.countersFacade.changeCount(countChange.counter.id, countChange.newCount);
   }
 }

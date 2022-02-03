@@ -1,4 +1,4 @@
 <app-counters
 	[countersData]="countersFacade.counters$ | async"
-	(addClicked)="onAddClicked($event)"
+	(onCountChange)="onCountChange($event)"
 ></app-counters>

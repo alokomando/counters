@@ -2,6 +2,6 @@
   <app-counter
     [title]="counter?.title"
     [count]="counter?.currentCount"
-    (addClicked)="onAddClicked(counterIndex)"
+    (addClicked)="onAddClicked($event, counterIndex)"
   ></app-counter>
 </div>
